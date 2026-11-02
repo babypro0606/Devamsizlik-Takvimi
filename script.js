@@ -344,5 +344,19 @@ function devamsizlikKaydet() {
   }
 }
 
+// -------------------------------------
+// PWA SERVICE WORKER KAYDI (ÇEVRİMDIŞI ÇALIŞMA)
+// -------------------------------------
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(registration => {
+        console.log('Service Worker başarıyla kaydedildi: ', registration.scope);
+      })
+      .catch(error => {
+        console.log('Service Worker kaydı başarısız oldu: ', error);
+      });
+  });
+}
 // Sayfa yüklendiğinde ilk hesaplamaları tetikle
 istatistikleriGuncelle();
