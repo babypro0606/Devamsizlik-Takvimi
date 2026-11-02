@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Öğrenci Paneli</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111827">
+</head>
+<body>
+
+  <!-- Üst Menü -->
+  <div class="navigasyon">
+    <div class="nav-arka-plan" id="nav-arka-plan"></div>
+    <button id="btn-devamsizlik" class="nav-btn aktif" onclick="sayfayaGit('devamsizlik-ekrani')">Devamsızlık</button>
+    <button id="btn-takvim" class="nav-btn" onclick="sayfayaGit('takvim-ekrani')">Takvim</button>
+  </div>
+
+  <!-- Kaydırılabilir Ana Alan -->
+  <div class="kaydirma-alani" id="scroll-alani">
+    
+    <!-- 1. BÖLÜM: DEVAMSIZLIK -->
+    <div id="devamsizlik-ekrani" class="bolum">
+      <h1 style="color: #111827; font-size: 2.5rem; margin-bottom: 10px;">Devamsızlık</h1>
+      
+      <!-- İSTATİSTİK KUTULARI -->
+      <div class="istatistik-kapsayici">
+        <div class="istatistik-kutu">
+          <span class="ist-baslik">Kullanılan</span>
+          <span class="ist-deger" id="kullanilan-gun">0</span>
+        </div>
+        <div class="istatistik-kutu">
+          <span class="ist-baslik">Kalan</span>
+          <span class="ist-deger" id="kalan-gun">0</span>
+        </div>
+        <div class="istatistik-kutu max-kutu" onclick="maksDevamsizlikAyarla()">
+          <span class="ist-baslik">Sınır ✎</span>
+          <span class="ist-deger" id="maks-gun">Belirsiz</span>
+        </div>
+      </div>
+
+      <!-- YENİ: DEVAMSIZLIK PLANLAYICI -->
+      <div class="plan-kutu">
+        <div class="plan-baslik">Devamsızlık Planlayıcı <span style="font-size: 1.1rem;">🗓️</span></div>
+        <div class="plan-durum" id="plan-durum">Hesaplanıyor...</div>
+        <div class="plan-detay" id="plan-detay">Kalan günlerinizi verimli dağıtmak için Yenile butonuna basın.</div>
+        <div class="plan-progress-bar"><div class="plan-progress-ic" id="plan-progress"></div></div>
+        <button class="btn-plan-yenile" onclick="planiYenile()">🔄 Planı Yeniden Hesapla</button>
+      </div>
+      
+      <button class="btn-manuel-ekle" onclick="modalAc()">+ Devamsızlık Ekle / Düzenle</button>
+    </div>
+
+    <!-- 2. BÖLÜM: TAKVİM -->
+    <div id="takvim-ekrani" class="bolum">
+      <div class="takvim-icerik">
+        <h2>2026-2027 Eğitim Yılı Takvimi</h2>
+        
+        <div class="lejant">
+          <div class="lejant-oge"><div class="kutu-ornek okul-var"></div><span>Okul Açık</span></div>
+          <div class="lejant-oge"><div class="kutu-ornek okul-yok"></div><span>Tatil</span></div>
+          <div class="lejant-oge"><div class="kutu-ornek bugun-vurgusu" style="border-width: 1px; box-shadow: none;"></div><span>Bugün</span></div>
+          <div class="lejant-oge"><div class="kutu-ornek tam-gun"></div><span>Tam</span></div>
+          <div class="lejant-oge"><div class="kutu-ornek yarim-gun"></div><span>Yarım</span></div>
+          <div class="lejant-oge"><div class="kutu-ornek gec"></div><span>Geç</span></div>
+        </div>
+
+        <div id="takvim-alani"></div>
+      </div>
+    </div>
+  </div>
+
+  <button id="bugune-git-btn">Bugüne Git</button>
+
+  <!-- MODAL: Devamsızlık Ekle -->
+  <div class="modal-overlay" id="dev-modal">
+    <div class="modal-icerik">
+      <h3>Devamsızlık İşlemi</h3>
+      
+      <div class="form-grup">
+        <label for="dev-tarih">Tarih Seçin</label>
+        <input type="date" id="dev-tarih">
+      </div>
+      
+      <div class="form-grup">
+        <label for="dev-tur">İşlem Türü</label>
+        <select id="dev-tur">
+          <option value="tam-gun">Tam Gün (1 Gün)</option>
+          <option value="yarim-gun">Yarım Gün (0.5 Gün)</option>
+          <option value="gec">Geç Kaldı (Sadece İşaret)</option>
+          <option value="sil">Devamsızlığı Sil</option>
+        </select>
+      </div>
+
+      <div class="modal-butonlar">
+        <button class="btn-iptal" onclick="modalKapat()">İptal</button>
+        <button class="btn-kaydet" onclick="devamsizlikKaydet()">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
