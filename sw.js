@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ogrenci-paneli-v1';
+const CACHE_NAME = 'ogrenci-paneli-v2';
 const urlsToCache = [
   './',
   './index.html',
